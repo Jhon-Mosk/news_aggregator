@@ -5,14 +5,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin panel</title>
+    <title>Document</title>
 </head>
 
 <body>
-    <?php include_once "menu.php" ?>
+    <?php
+    include_once "menu.php"
+    ?>
 
-    <h1>Админка</h1>
-
+    <h1>Новости</h1>
 </body>
 
 </html>
