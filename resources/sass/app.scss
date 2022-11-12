@@ -1,0 +1,23 @@
+// Fonts
+@import url('https://fonts.bunny.net/css?family=Nunito');
+
+// Variables
+@import 'variables';
+
+// Bootstrap
+@import 'bootstrap/scss/bootstrap';
+
+.alert-custom {
+    width: fit-content;
+    position: absolute;
+    z-index: 1;
+    left: 50%
+}
+
+.card-image {
+    border: 1px solid;
+    border-radius: 15px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}

@@ -5,15 +5,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>@section('title')Агрегатор | @show</title>
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 
 <body>
-    <?php
-    include_once "news/menu.php"
-    ?>
-
-    <h1>Главная</h1>
+    @yield('menu')
+    @yield('content')
+    <script src="{{ asset('js/app.js') }}"></script>
 </body>
 
 </html>
