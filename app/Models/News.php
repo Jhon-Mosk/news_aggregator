@@ -2,36 +2,14 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Facades\File;
+use Illuminate\Database\Eloquent\Model;
 
-class News
+class News extends Model
 {
-    public function getNews()
+    protected $fillable = ['title', 'text', 'isPrivate'];
+
+    public function category()
     {
-        return json_decode(File::get(storage_path() . '/app/news/news.json'), true);
-    }
-
-    public function getOneNews($category, $newsSlug)
-    {
-        foreach ($this->getNews() as $news) {
-            if ($news['slug'] == $newsSlug && $category['id'] == $news['category_id']) {
-                return $news;
-            }
-        }
-
-        return [];
-    }
-
-    public function getCategoryNews($category_id)
-    {
-        $result = [];
-
-        foreach ($this->getNews() as $news) {
-            if ($news['category_id'] == $category_id) {
-                $result[] = $news;
-            }
-        }
-
-        return $result;
+        return $this->belongsTo(Category::class);
     }
 }
