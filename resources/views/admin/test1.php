@@ -9,11 +9,10 @@
 </head>
 
 <body>
-    <?php
-    include_once "news/menu.php"
-    ?>
+    <?php include_once "menu.php" ?>
 
-    <h1>Главная</h1>
+    <h1>test1</h1>
+
 </body>
 
 </html>
