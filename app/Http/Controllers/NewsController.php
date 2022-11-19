@@ -2,44 +2,35 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Categories;
+use App\Models\Category;
 use App\Models\News;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 class NewsController extends Controller
 {
     public function index()
     {
-        $categories = DB::table('categories')
-            ->get();
+        $categories = Category::all();
 
         return view('news.categories', ['categories' => $categories]);
     }
 
     public function showCategoryNews($slug)
     {
-        $category = DB::table('categories')
-            ->where('slug', $slug)
-            ->first();
-
-        $news = DB::table('news')
-            ->where('category_id', $category->id ?? null)
-            ->get();
+        $category = Category::query()->where('slug', $slug)->first();
 
         return view('news.category', [
             'category' => $category,
-            'news' => $news
+            'news' => $category->newsAllPaginate()
         ]);
     }
 
     public function showOneNews($categorySlug, $newsSlug)
     {
-        $category = DB::table('categories')
+        $category = Category::query()
             ->where('slug', $categorySlug)
             ->first();
 
-        $news = DB::table('news')
+        $news = News::query()
             ->where('slug', $newsSlug)
             ->where('category_id', $category->id ?? null)
             ->first();

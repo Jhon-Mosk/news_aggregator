@@ -17,14 +17,11 @@ return new class extends Migration
         Schema::create('news', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->integer('category_id');
             $table->text('text');
             $table->string('image')->nullable(true);
             $table->boolean('isPrivate')->default(false);
             $table->string('slug')->nullable(true);
             $table->timestamps();
-            // $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
-            // $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

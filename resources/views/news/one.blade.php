@@ -7,7 +7,6 @@
 @section('menu')
     @include('menu')
 @endsection
-
 @section('content')
     @if ($news)
         <div class="card">
