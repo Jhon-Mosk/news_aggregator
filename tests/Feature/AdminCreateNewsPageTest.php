@@ -6,7 +6,7 @@ use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class AdminCreateNewsPageTest extends TestCase
+class AdminNewsPageTest extends TestCase
 {
     /**
      * A basic feature test example.
@@ -15,7 +15,7 @@ class AdminCreateNewsPageTest extends TestCase
      */
     public function test_page_exist()
     {
-        $response = $this->get('/admin/news/create');
+        $response = $this->get('/admin/news');
 
         $response->assertStatus(200);
     }

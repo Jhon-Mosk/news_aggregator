@@ -4,8 +4,8 @@
             главная</strong></a>
 </li>
 <li class="nav-item">
-    <a class="nav-link {{ request()->routeIs('admin.createNews') ? 'text-bg-secondary' : '' }}"
-        href="{{ route('admin.createNews') }}"><strong>Добавить новость</strong></a>
+    <a class="nav-link {{ request()->routeIs('admin.news.categories') ? 'text-bg-secondary' : '' }}"
+        href="{{ route('admin.news.categories') }}"><strong>Новости</strong></a>
 </li>
 <li class="nav-item">
     <a class="nav-link {{ request()->routeIs('admin.download.json') ? 'text-bg-secondary' : '' }}"
