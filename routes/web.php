@@ -1,11 +1,13 @@
 <?php
 
-use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NewsController;
-use Illuminate\Support\Facades\App;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -34,10 +36,16 @@ Route::name('news.')
 
 Route::view('/about', 'about')->name('about');
 
+Route::match(['get', 'post'], '/profile', [ProfileController::class, 'update'])->name('profile');
+
 Route::name('admin.')
     ->prefix('admin')
+    ->middleware(['auth', 'is_admin'])
     ->group(
         function () {
+            Route::resource('/users', AdminUserController::class)->except(['show', 'create', 'edit', 'store']);
+            Route::get('/ajax', [AdminIndexController::class, 'ajax'])->name('ajax');
+            Route::post('/ajax', [AdminIndexController::class, 'send']);
             Route::get('/', [AdminIndexController::class, 'index'])->name('index');
             Route::name('download.')
                 ->prefix('download')
@@ -48,7 +56,7 @@ Route::name('admin.')
                     }
                 );
             Route::resource('/news', AdminNewsController::class)->except(['show']);
-            Route::resource('/categories', CategoryController::class)->except(['show']);
+            Route::resource('/categories', AdminCategoryController::class)->except(['show']);
             Route::name('news.')
                 ->prefix('news')
                 ->group(
@@ -62,5 +70,9 @@ Route::name('admin.')
     );
 
 Auth::routes();
+// Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
+// Route::post('login', [LoginController::class, 'login']);
+// Route::get('logout', [LoginController::class, 'logout'])->name('logout');
+// Route::post('logout', [LoginController::class, 'logout']);
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

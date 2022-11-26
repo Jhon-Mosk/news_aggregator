@@ -37,8 +37,14 @@
                             <label for="inputNewsTitle" class="col-md-4 col-form-label text-md-end">Заголовок</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="title" class="form-control" id="inputNewsTitle"
-                                    value="{{ old('title') ?? $news->title }}" required autofocus>
+                                <input type="text" name="title"
+                                    class="form-control @error('title') is-invalid @enderror" id="inputNewsTitle"
+                                    value="{{ old('title') ?? $news->title }}" required autofocus />
+                                @error('title')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -49,10 +55,18 @@
                                     @forelse ($categories as $category)
                                         <option @if ($category->id == old('category_id') || $category->id == $news->category_id) selected @endif
                                             value="{{ $category->id }}">
-                                            {{ $category->name }}</option>
+                                            {{ $category->name }}
+                                        </option>
                                     @empty
                                         <p>Категории осутствуют</p>
                                     @endforelse
+                                    @if ($errors->has('category_id'))
+                                        <div class="form-text text-danger">
+                                            @foreach ($errors->get('category_id') as $error)
+                                                <p>{{ $error }}</p>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 </select>
                             </div>
                         </div>
@@ -60,7 +74,13 @@
                         <div class="row mb-3">
                             <label for="inputNewsText" class="col-md-4 col-form-label text-md-end">Текст</label>
                             <div class="col-md-6">
-                                <textarea name="text" class="form-control" id="inputNewsText" rows="3" required>{{ old('text') ?? $news->text }}</textarea>
+                                <textarea name="text" class="form-control @error('text') is-invalid @enderror" id="inputNewsText" rows="3"
+                                    required>{{ old('text') ?? $news->text }}</textarea>
+                                @error('text')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -69,7 +89,13 @@
                                 изображение</label>
                             <div class="col-md-6">
                                 <input type="file" accept="image/png, image/jpeg, image/webp" name="image"
-                                    class="form-control" id="inputLoadImage" rows="3">
+                                    class="form-control @error('image') is-invalid @enderror" id="inputLoadImage"
+                                    rows="3" />
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -79,7 +105,14 @@
                                 <div class="form-check form-switch">
                                     <input @if (old('isPrivate') || $news->isPrivate) checked @endif name="isPrivate"
                                         class="form-check-input" type="checkbox" role="switch" id="inputNewsIsPrivate"
-                                        value="1">
+                                        value="1" />
+                                    @if ($errors->has('isPrivate'))
+                                        <div class="form-text text-danger">
+                                            @foreach ($errors->get('isPrivate') as $error)
+                                                <p>{{ $error }}</p>
+                                            @endforeach
+                                        </div>
+                                    @endif
                                 </div>
                             </div>
                         </div>

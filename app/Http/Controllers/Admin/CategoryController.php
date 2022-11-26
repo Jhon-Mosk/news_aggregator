@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CategoryRequest;
 use App\Models\Category;
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -38,7 +38,7 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, Category $category)
+    public function store(CategoryRequest $request, Category $category)
     {
         //создание категории
         return $this->upsertCategory($request, $category, 'save');
@@ -63,7 +63,7 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(CategoryRequest $request, Category $category)
     {
         //обновить
         return $this->upsertCategory($request, $category, 'update');
@@ -72,6 +72,8 @@ class CategoryController extends Controller
     private function upsertCategory($request, $category, $action)
     {
         $request->flash();
+
+        $request->validated();
 
         $slug = Str::of($request->name)->slug('-');
         $category->slug = $slug;

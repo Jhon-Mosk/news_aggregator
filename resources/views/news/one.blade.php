@@ -13,7 +13,7 @@
             <img src="{{ $news->image ?? asset('/storage/img/default.jpg') }}" class="card-img-top" alt="news picture">
             <div class="card-body">
                 <h2 class="card-title">{{ $news->title }}</h2>
-                @if (!$news->isPrivate)
+                @if (!$news->isPrivate || Auth::user())
                     <p class="card-text">{{ $news->text }}</p>
                 @else
                     <p class="card-text">Зарегистрируйтесь для просмотра</p>

@@ -20,7 +20,7 @@ class NewsController extends Controller
 
         return view('news.category', [
             'category' => $category,
-            'news' => $category->newsAllPaginate()
+            'news' => $category->news()->paginate(5)
         ]);
     }
 

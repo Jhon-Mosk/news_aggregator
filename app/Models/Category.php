@@ -11,8 +11,8 @@ class Category extends Model
 
     protected $fillable = ['name'];
 
-    public function newsAllPaginate()
+    public function news()
     {
-        return $this->hasMany(News::class)->paginate(5);
+        return $this->hasMany(News::class);
     }
 }
