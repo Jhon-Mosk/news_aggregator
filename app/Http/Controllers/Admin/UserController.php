@@ -35,7 +35,7 @@ class UserController extends Controller
             $user->save();
 
             return redirect()
-                ->route('admin.users.index');
+                ->route('admin.users.index')->withSuccess('Права изменены');
         } else {
             return redirect()
                 ->route('admin.users.index')->withError('Нельзя снять админа с себя');
