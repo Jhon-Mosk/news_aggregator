@@ -15,9 +15,9 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::query()->where('id', '!=', Auth::id())->get();
 
-        return view('admin.users.index', ['users' => $users->except(Auth::user()->id)]);
+        return view('admin.users.index', ['users' => $users]);
     }
 
     /**
@@ -29,12 +29,17 @@ class UserController extends Controller
      */
     public function update(User $user)
     {
-        $user->is_admin = !$user->is_admin ?? 0;
+        if ($user->id !== Auth::id()) {
+            $user->is_admin = !$user->is_admin ?? 0;
 
-        $user->save();
+            $user->save();
 
-        return redirect()
-            ->route('admin.users.index');
+            return redirect()
+                ->route('admin.users.index');
+        } else {
+            return redirect()
+                ->route('admin.users.index')->withError('Нельзя снять админа с себя');
+        }
     }
 
     /**

@@ -3,7 +3,9 @@
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
+use App\Http\Controllers\Admin\ParserController as AdminParserController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NewsController;
@@ -47,6 +49,7 @@ Route::name('admin.')
             Route::get('/ajax', [AdminIndexController::class, 'ajax'])->name('ajax');
             Route::post('/ajax', [AdminIndexController::class, 'send']);
             Route::get('/', [AdminIndexController::class, 'index'])->name('index');
+            Route::get('/parser', [AdminParserController::class, 'index'])->name('parser');
             Route::name('download.')
                 ->prefix('download')
                 ->group(
@@ -70,6 +73,9 @@ Route::name('admin.')
     );
 
 Auth::routes();
+
+Route::get('/auth/{soc}', [LoginController::class, 'loginSoc'])->name('loginSoc');
+Route::get('/auth/{soc}/response', [LoginController::class, 'responseSoc'])->name('responseSoc');
 // Route::get('login', [LoginController::class, 'showLoginForm'])->name('login');
 // Route::post('login', [LoginController::class, 'login']);
 // Route::get('logout', [LoginController::class, 'logout'])->name('logout');

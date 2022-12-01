@@ -23,7 +23,7 @@ class NewsController extends Controller
 
         return view('admin.news.category', [
             'category' => $category,
-            'news' => $category->news()->paginate(5)
+            'news' => $category->news()->orderBy('pubDate', 'desc')->paginate(5)
         ]);
     }
 

@@ -84,6 +84,24 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-3">
+                                <label for="password-new-confirmation"
+                                    class="col-md-4 col-form-label text-md-end">Подтвердите
+                                    пароль</label>
+
+                                <div class="col-md-6">
+                                    <input id="password-new-confirmation" type="password"
+                                        class="form-control @error('password_new_confirmation') is-invalid @enderror"
+                                        name="password_new_confirmation" required autocomplete="new-password-confirmation">
+
+                                    @error('password_new_confirmation')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                            </div>
+
                             <div class="row mb-0">
                                 <div class="col-md-6 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

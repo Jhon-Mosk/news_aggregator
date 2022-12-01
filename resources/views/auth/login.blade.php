@@ -66,6 +66,20 @@
                                 </div>
                             </div>
 
+                            <div class="row mb-3">
+                                <div class="col-md-6 offset-md-4">
+                                    <a href="{{ route('loginSoc', 'vkontakte') }}"><img
+                                            src="{{ asset('/storage/img/vk_logo.png') }}" alt="vk_logo"
+                                            width="40"></a>
+                                    <a href="{{ route('loginSoc', 'github') }}"><img
+                                            src="{{ asset('/storage/img/github_logo.png') }}" alt="github_logo"
+                                            width="40"></a>
+                                    <a href="{{ route('loginSoc', 'google') }}"><img
+                                            src="{{ asset('/storage/img/google_logo.png') }}" alt="google_logo"
+                                            width="40"></a>
+                                </div>
+                            </div>
+
                             <div class="row mb-0">
                                 <div class="col-md-8 offset-md-4">
                                     <button type="submit" class="btn btn-primary">

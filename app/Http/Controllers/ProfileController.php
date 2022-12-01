@@ -45,14 +45,14 @@ class ProfileController extends Controller
             'name' => 'required|string|max:15',
             'email' => 'required|email|unique:users,email,' . Auth::id(),
             'password' => 'required',
-            'password_new' => 'required|string|min:3',
+            'password_new' => 'required|string|min:3|confirmed',
         ];
     }
 
     protected function attributeNames()
     {
         return [
-            'password_new' => 'Новый пароль'
+            'password_new' => 'Новый пароль',
         ];
     }
 }
