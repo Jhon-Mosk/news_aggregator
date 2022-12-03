@@ -24,7 +24,7 @@ class NewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:5|max:20',
+            'title' => 'required|min:5|max:100',
             'category_id' => "required|exists:App\Models\Category,id",
             'text' => 'required|min:5',
             'image' => 'mimes:png,jpeg,webp|max:10000',

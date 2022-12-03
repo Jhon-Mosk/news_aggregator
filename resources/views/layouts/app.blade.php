@@ -17,6 +17,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
@@ -119,6 +120,17 @@
             </div>
         </main>
     </div>
+    <script>
+        var options = {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+    </script>
+    <script>
+        CKEDITOR.replace('inputNewsText', options);
+    </script>
 </body>
 
 </html>

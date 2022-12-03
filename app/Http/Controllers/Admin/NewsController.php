@@ -59,6 +59,10 @@ class NewsController extends Controller
 
         $url = null;
 
+        if ($news->image) {
+            $url = $news->image;
+        }
+
         if ($request->file('image')) {
             $path = Storage::putFile('public/img', $request->file('image'));
             $url = Storage::url($path);

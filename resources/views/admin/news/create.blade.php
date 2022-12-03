@@ -75,7 +75,7 @@
                             <label for="inputNewsText" class="col-md-4 col-form-label text-md-end">Текст</label>
                             <div class="col-md-6">
                                 <textarea name="text" class="form-control @error('text') is-invalid @enderror" id="inputNewsText" rows="3"
-                                    required>{{ old('text') ?? $news->text }}</textarea>
+                                    required>{!! old('text') ?? $news->text !!}</textarea>
                                 @error('text')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

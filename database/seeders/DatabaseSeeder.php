@@ -28,5 +28,6 @@ class DatabaseSeeder extends Seeder
         //     ->count(100)
         //     ->create();
         $this->call(AdminSeeder::class);
+        $this->call(NewsSourcesSeeder::class);
     }
 }

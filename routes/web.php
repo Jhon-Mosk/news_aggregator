@@ -5,11 +5,11 @@ use App\Http\Controllers\Admin\IndexController as AdminIndexController;
 use App\Http\Controllers\Admin\NewsController as AdminNewsController;
 use App\Http\Controllers\Admin\ParserController as AdminParserController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+use App\Http\Controllers\Admin\NewsSourceController as AdminNewsSourceController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\NewsController;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -49,7 +49,6 @@ Route::name('admin.')
             Route::get('/ajax', [AdminIndexController::class, 'ajax'])->name('ajax');
             Route::post('/ajax', [AdminIndexController::class, 'send']);
             Route::get('/', [AdminIndexController::class, 'index'])->name('index');
-            Route::get('/parser', [AdminParserController::class, 'index'])->name('parser');
             Route::name('download.')
                 ->prefix('download')
                 ->group(
@@ -60,10 +59,13 @@ Route::name('admin.')
                 );
             Route::resource('/news', AdminNewsController::class)->except(['show']);
             Route::resource('/categories', AdminCategoryController::class)->except(['show']);
+            Route::resource('/news_sources', AdminNewsSourceController::class)->except(['show']);
             Route::name('news.')
                 ->prefix('news')
                 ->group(
                     function () {
+                        Route::get('/parse', [AdminParserController::class, 'parse'])->name('parse');
+                        Route::get('/parser', [AdminParserController::class, 'index'])->name('parser');
                         Route::get('/categories', [AdminNewsController::class, 'index'])->name('categories');
                         Route::get('/{category}', [AdminNewsController::class, 'showCategoryNews'])->name('categoryNews');
                         Route::get('/{category}/{news}', [AdminNewsController::class, 'showOneNews'])->name('oneNews');
@@ -71,6 +73,10 @@ Route::name('admin.')
                 );
         }
     );
+
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth', 'is_admin']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 Auth::routes();
 

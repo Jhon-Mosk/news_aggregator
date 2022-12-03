@@ -19,10 +19,6 @@
 
     <ul class="dropdown-menu">
         <li class="nav-item">
-            <a class="nav-link {{ request()->routeIs('admin.parser') ? 'text-bg-secondary' : '' }}"
-                href="{{ route('admin.parser') }}"><strong>Парсер</strong></a>
-        </li>
-        <li class="nav-item">
             <a class="nav-link {{ request()->routeIs('admin.download.json') ? 'text-bg-secondary' : '' }}"
                 href="{{ route('admin.download.json') }}"><strong>Скачать новости</strong></a>
         </li>

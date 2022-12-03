@@ -13,5 +13,13 @@
         "postcss": "^8.1.14",
         "sass": "^1.32.11",
         "vite": "^3.0.0"
+    },
+    "dependencies": {
+        "css-loader": "^5.2.7",
+        "postcss-loader": "^4.3.0",
+        "raw-loader": "^4.0.2",
+        "style-loader": "^2.0.0",
+        "webpack": "^5.75.0",
+        "webpack-cli": "^4.10.0"
     }
 }

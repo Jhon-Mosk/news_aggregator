@@ -12,6 +12,7 @@
     <a href="{{ route('admin.news.create') }}" class="btn btn-outline-primary create-news-btn ">Добавить новость</a>
     <a href="{{ route('admin.categories.index') }}" class="btn btn-outline-primary create-news-btn">Редактировать
         категории</a>
+    <a href="{{ route('admin.news_sources.index') }}" class="btn btn-outline-primary create-news-btn">Источники новостей</a>
     <h1>Категории новостей</h1>
     <div class="list-group">
         @forelse ($categories as $item)
