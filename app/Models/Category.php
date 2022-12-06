@@ -9,10 +9,10 @@ class Category extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'slug'];
 
-    public function newsAllPaginate()
+    public function news()
     {
-        return $this->hasMany(News::class)->paginate(5);
+        return $this->hasMany(News::class);
     }
 }

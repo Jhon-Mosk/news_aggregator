@@ -10,12 +10,21 @@
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
+        "laravel/socialite": "^5.5",
         "laravel/tinker": "^2.7",
-        "laravel/ui": "^4.0"
+        "laravel/ui": "^4.0",
+        "orchestra/parser": "^7.0",
+        "predis/predis": "^2.0",
+        "socialiteproviders/github": "^4.1",
+        "socialiteproviders/google": "^4.1",
+        "socialiteproviders/vkontakte": "^5.0",
+        "unisharp/laravel-filemanager": "^2.5"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.7",
         "fakerphp/faker": "^1.9.1",
+        "laravel-lang/lang": "^12.4",
+        "laravel/dusk": "^7.1",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
         "mockery/mockery": "^1.4.4",

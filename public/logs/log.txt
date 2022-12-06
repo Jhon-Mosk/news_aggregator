@@ -1,0 +1,3 @@
+2022-12-03T13:55:59+00:00 https://lenta.ru/rss
+2022-12-03T13:55:59+00:00 https://www.vedomosti.ru/rss/news
+2022-12-03T13:56:01+00:00 https://tass.ru/rss/anews.xml?sections=NDczMA%3D%3D

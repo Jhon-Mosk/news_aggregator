@@ -2,11 +2,14 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class News extends Model
 {
-    protected $fillable = ['title', 'text', 'isPrivate'];
+    use HasFactory;
+
+    protected $fillable = ['title', 'text', 'image', 'isPrivate', 'category_id', 'guid', 'link', 'pubDate'];
 
     public function category()
     {

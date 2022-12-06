@@ -37,8 +37,14 @@
                             <label for="inputNewsTitle" class="col-md-4 col-form-label text-md-end">Категория</label>
 
                             <div class="col-md-6">
-                                <input type="text" name="name" class="form-control" id="inputNewsTitle"
+                                <input type="text" name="name"
+                                    class="form-control @error('name') is-invalid @enderror" id="inputNewsTitle"
                                     value="{{ old('name') ?? $category->name }}" required autofocus>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

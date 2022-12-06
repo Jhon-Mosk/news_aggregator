@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\NewsRequest;
 use App\Models\Category;
 use App\Models\News;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
@@ -23,7 +23,7 @@ class NewsController extends Controller
 
         return view('admin.news.category', [
             'category' => $category,
-            'news' => $category->newsAllPaginate()
+            'news' => $category->news()->orderBy('pubDate', 'desc')->paginate(5)
         ]);
     }
 
@@ -55,7 +55,13 @@ class NewsController extends Controller
     {
         $request->flash();
 
+        $request->validated();
+
         $url = null;
+
+        if ($news->image) {
+            $url = $news->image;
+        }
 
         if ($request->file('image')) {
             $path = Storage::putFile('public/img', $request->file('image'));
@@ -67,12 +73,12 @@ class NewsController extends Controller
         $news->image = $url;
         $news->category_id = $category_id;
 
-        ($action === 'save') ? $news->fill($request->all())->save() : $news->fill($request->all())->update();
+        $news->fill($request->all())->save();
 
         $newsSlug = 'news' . $news->id;
 
         $news->slug = $newsSlug;
-        ($action === 'save') ? $news->save() : $news->update();
+        $news->save();
 
         $categorySlug = Category::query()
             ->select('slug')
@@ -84,7 +90,7 @@ class NewsController extends Controller
             ->with('success', ($action === 'save') ? 'Новость успешно добавлена' : 'Новость успешно изменена');
     }
 
-    public function store(Request $request, News $news)
+    public function store(NewsRequest $request, News $news)
     {
         return $this->upsertNews($request, $news, 'save');
     }
@@ -110,7 +116,7 @@ class NewsController extends Controller
         ]);
     }
 
-    public function update(Request $request, News $news)
+    public function update(NewsRequest $request, News $news)
     {
         return $this->upsertNews($request, $news, 'update');
     }

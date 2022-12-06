@@ -17,6 +17,7 @@
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
 
     <!-- Scripts -->
+    <script src="//cdn.ckeditor.com/4.6.2/standard/ckeditor.js"></script>
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
 
@@ -26,6 +27,15 @@
             <div class="container">
                 <div class="alert alert-custom alert-success alert-dismissible fade show" role="alert">
                     <strong>{{ session('success') }}</strong>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            </div>
+        @endif
+
+        @if (session('error'))
+            <div class="container">
+                <div class="alert alert-custom alert-danger alert-dismissible fade show" role="alert">
+                    <strong>{{ session('error') }}</strong>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
             </div>
@@ -64,6 +74,11 @@
                                 </li>
                             @endif
                         @else
+                            @if (Auth::user())
+                                <img style="border-radius: 20%"
+                                    src="{{ !empty(Auth::user()->avatar) ? Auth::user()->avatar : asset('/storage/img/default_avatar.png') }}"
+                                    alt="avatar" width="40">
+                            @endif
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button"
                                     data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -71,10 +86,13 @@
                                 </a>
 
                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('profile') }}">
+                                        Профиль
+                                    </a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
+                                        {{ __('Выйти') }}
                                     </a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
@@ -102,6 +120,17 @@
             </div>
         </main>
     </div>
+    <script>
+        var options = {
+            filebrowserImageBrowseUrl: '/laravel-filemanager?type=Images',
+            filebrowserImageUploadUrl: '/laravel-filemanager/upload?type=Images&_token=',
+            filebrowserBrowseUrl: '/laravel-filemanager?type=Files',
+            filebrowserUploadUrl: '/laravel-filemanager/upload?type=Files&_token='
+        };
+    </script>
+    <script>
+        CKEDITOR.replace('inputNewsText', options);
+    </script>
 </body>
 
 </html>
